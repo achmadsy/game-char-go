@@ -1,8 +1,14 @@
 FROM golang:latest
 
-RUN apt-get update
-RUN apt-get install vim -y
-RUN go get "github.com/go-sql-driver/mysql"
-RUN go get ./
-RUN go build
-RUN go run main.go
+ENV GIN_MODE=release
+ENV PORT=8080
+
+WORKDIR /go/game-char-go
+
+COPY ./game-char-go /go/game-char-go
+
+RUN go build game-char-go
+
+EXPOSE $PORT
+
+ENTRYPOINT [ "./game-char-go" ]

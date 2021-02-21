@@ -15,7 +15,7 @@ var DB *gorm.DB
 func InitDB() {
 	user := os.Getenv("dbuser")
 	pass := os.Getenv("dbpass")
-	dsn := user + ":" + pass + "@tcp(localhost:3306)/user?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := user + ":" + pass + "@tcp(db:3306)/user?charset=utf8mb4&parseTime=True&loc=Local"
 	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	defer database.DB()
 
