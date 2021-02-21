@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    build:
+      context: ./sql_docker
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 12345
+    container_name: golang_db
+    ports:
+      - "3306:3306"
+    tty: true
+  app:
+    build:
+      context: ./game-char-go
+    environment:
+      dbuser: root
+      dbpass: 12345
+    volumes:
+      - "./:/go"
+    container_name: golang_app
+    ports:
+      - "8080:8080"
+    tty: true
+    depends_on:
+      - db

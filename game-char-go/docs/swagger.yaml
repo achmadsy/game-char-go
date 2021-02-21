@@ -1,0 +1,149 @@
+definitions:
+  models.Character:
+    properties:
+      char_code:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      power:
+        type: integer
+      userId:
+        type: integer
+      value:
+        type: number
+    type: object
+  models.OutStruct:
+    properties:
+      data:
+        type: object
+      isSuccess:
+        type: boolean
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /v1/user/{userID}/chars/:
+    post:
+      consumes:
+      - application/json
+      description: Post new character for the user
+      parameters:
+      - description: New Character
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/models.Character'
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Character'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+      summary: Post new character
+  /v1/user/{userID}/chars/{charID}:
+    put:
+      consumes:
+      - application/json
+      description: Edit character for the user
+      parameters:
+      - description: Edit Character
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/models.Character'
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      - description: Character ID
+        in: path
+        name: charID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Character'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+      summary: Edit character
+  /v1/user/{userID}/chars/all:
+    get:
+      description: get all characters for the user
+      parameters:
+      - description: User ID
+        in: path
+        name: userID
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Character'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/models.OutStruct'
+      summary: Show all user's characters
+swagger: "2.0"
