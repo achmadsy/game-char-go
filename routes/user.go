@@ -1,14 +1,14 @@
 package routes
 
 import (
-	"github.com/achmadsy/game-char-go/api/charsv1"
+	apicharsv1 "github.com/achmadsy/game-char-go/api/chars_v1"
 	"github.com/gin-gonic/gin"
 )
 
 func addUserCharsRoutes(rg *gin.RouterGroup) {
-	chars := rg.Group("/user/chars")
+	chars := rg.Group("/user/:userid/chars")
 
-	chars.GET("/all", charsv1.GetAllUserChars)
-	chars.POST("/", charsv1.PostUserNewChar)
-	chars.PUT("/:id", charsv1.PutUserEditedChar)
+	chars.GET("/all", apicharsv1.GetAllUserChars)
+	chars.POST("/", apicharsv1.PostUserNewChar)
+	chars.PUT("/:id", apicharsv1.PutUserEditedChar)
 }
