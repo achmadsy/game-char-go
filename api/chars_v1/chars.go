@@ -1,4 +1,4 @@
-package chars
+package charsv1
 
 import (
 	"net/http"
